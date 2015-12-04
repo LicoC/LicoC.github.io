@@ -70,5 +70,5 @@ theme: landscape
 deploy:
   type: git
   message: "update"
-  repo: https://github.com/LicoC/LicoC.github.io.git
-  github: https://github.com/LicoC/LicoC.github.io.git,master
+  repo: git@github.com:LicoC/LicoC.github.io.git
+  github: git@github.com:LicoC/LicoC.github.io.git,master
