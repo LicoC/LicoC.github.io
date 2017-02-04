@@ -6,17 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | mLicorice</title>
+  <title>Objective-C封装std::priority_queue&lt;&gt;实现优先队列 | mLicorice</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个有情怀的半吊子程序媛">
-<meta property="og:type" content="website">
-<meta property="og:title" content="mLicorice">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="最近项目中需要用到优先队列，google了半天，发现Cocoa Foundation中竟然木有现成的好用的轮子可以拿来用。找了半天，也只有Core Foundation的CFBinaryHeap算是满足需求，但是CFBinaryHeap需要自己管理释放对象，而且不能实时更新heap中的值，再一看文档中提供的方法，辣么多回调列在那里，做为一个前C++开发者，我想我还不如用我熟悉一点的std::pri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C封装std::priority_queue<>实现优先队列">
+<meta property="og:url" content="http://yoursite.com/2016/12/05/Objective-C封装std-priority-queue-实现优先队列/index.html">
 <meta property="og:site_name" content="mLicorice">
-<meta property="og:description" content="一个有情怀的半吊子程序媛">
+<meta property="og:description" content="最近项目中需要用到优先队列，google了半天，发现Cocoa Foundation中竟然木有现成的好用的轮子可以拿来用。找了半天，也只有Core Foundation的CFBinaryHeap算是满足需求，但是CFBinaryHeap需要自己管理释放对象，而且不能实时更新heap中的值，再一看文档中提供的方法，辣么多回调列在那里，做为一个前C++开发者，我想我还不如用我熟悉一点的std::pri">
+<meta property="og:updated_time" content="2017-02-04T09:58:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mLicorice">
-<meta name="twitter:description" content="一个有情怀的半吊子程序媛">
+<meta name="twitter:title" content="Objective-C封装std::priority_queue<>实现优先队列">
+<meta name="twitter:description" content="最近项目中需要用到优先队列，google了半天，发现Cocoa Foundation中竟然木有现成的好用的轮子可以拿来用。找了半天，也只有Core Foundation的CFBinaryHeap算是满足需求，但是CFBinaryHeap需要自己管理释放对象，而且不能实时更新heap中的值，再一看文档中提供的方法，辣么多回调列在那里，做为一个前C++开发者，我想我还不如用我熟悉一点的std::pri">
   
     <link rel="alternative" href="/atom.xml" title="mLicorice" type="application/atom+xml">
   
@@ -148,88 +149,83 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Objective-C封装std-priority-queue-实现优先队列" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/02/04/UILabel-AFNetworking-显示下载百分比/" class="archive-article-date">
-  	<time datetime="2017-02-04T09:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-04</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/02/04/UILabel-AFNetworking-显示下载百分比/">UILabel-AFNetworking-显示下载百分比</a>
+    <h1 class="article-title" itemprop="name">
+      Objective-C封装std::priority_queue&lt;&gt;实现优先队列
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">kvo</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">AFNetworking</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/12/05/Objective-C封装std-priority-queue-实现优先队列/" class="archive-article-date">
+        
+        <a href="/2016/12/05/Objective-C封装std-priority-queue-实现优先队列/" class="archive-article-date">
   	<time datetime="2016-12-05T09:40:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-05</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/12/05/Objective-C封装std-priority-queue-实现优先队列/">Objective-C封装std::priority_queue&lt;&gt;实现优先队列</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近项目中需要用到优先队列，google了半天，发现Cocoa Foundation中竟然木有现成的好用的轮子可以拿来用。找了半天，也只有Core Foundation的CFBinaryHeap算是满足需求，但是CFBinaryHeap需要自己管理释放对象，而且不能实时更新heap中的值，再一看文档中提供的方法，辣么多回调列在那里，做为一个前C++开发者，我想我还不如用我熟悉一点的std::priority_queue来实现我的需求吧。</p>
+<!-- 阅读更多 -->
+<h3 id="回忆下什么是优先队列"><a href="#回忆下什么是优先队列" class="headerlink" title="回忆下什么是优先队列"></a>回忆下什么是优先队列</h3><p>讲到队列一般人都知道，先进先出嘛，就和排队买东西一样，先来的人排在前面，买完就从队列里出去了。那什么是优先队列呢，假设我们生活在一个特别尊老爱幼的社会，每次排队买东西的时候，都要按照年龄作为优先级比较的参照，年纪大的在最前面，年纪小的在其次，青壮年排在后面，老爷爷老奶奶买完了，才轮到小孩儿，小孩儿们正买着辣条呢呢，忽然又来了个老奶奶，大家于是很懂礼貌的让老奶奶排到了第一个，等老奶奶抢完了超市里的土鸡蛋离开队伍后，才轮到刚刚正准备买辣条的小孩子继续买。</p>
+<h3 id="用OC封装std-priority-queue"><a href="#用OC封装std-priority-queue" class="headerlink" title="用OC封装std::priority_queue"></a>用OC封装std::priority_queue</h3><p>STL中的priority_queue是C++基于heap实现的优先队列模板类，其鲁棒性和性能已经经过了无数开发者的考验。所以我们放心大胆的用吧。</p>
+<p>首先定义一下std::priority_queue&lt;&gt;的包装类:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">----PriorityQueue.h----</div><div class="line">@interface QueueIntNodeObject : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, assign) NSUInteger compareValue;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@interface PriorityQueue : NSObject</div><div class="line"></div><div class="line">@property (nonatomic, readonly) QueueIntNodeObject *topObject;</div><div class="line"></div><div class="line">@property (nonatomic, readonly) NSUInteger count;</div><div class="line"></div><div class="line">- (void)pushObject:(QueueNodeObject *)myObject;</div><div class="line"></div><div class="line">- (void)popObject;</div><div class="line"></div><div class="line">- (void)popAllObjects;</div></pre></td></tr></table></figure>
+<p>QueueIntNodeObject是优先队列中所要管理的对象的基类，目前先实现以NSUInteger做为比较优先级的类型，有需要的可以扩展其他的基类出来。<br>PriorityQueue是用来包装std::priority_queue的wrapper。定义几个常用的属性和方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">----PriorityQueue.mm----</div><div class="line">#import &quot;PriorityQueue.h&quot;</div><div class="line">#include &lt;queue&gt;</div><div class="line"></div><div class="line">class QueueCompare &#123;</div><div class="line">public:</div><div class="line">    bool operator()(QueueIntNodeObject *l, QueueIntNodeObject *r) const &#123;</div><div class="line">        if (l.compareValue &lt; r.compareValue) &#123;</div><div class="line">            return true;</div><div class="line">        &#125;else &#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">typedef std::priority_queue&lt;QueueIntNodeObject *, std::vector&lt;QueueIntNodeObject *&gt;, QueueCompare&gt; Queue;</div><div class="line"></div><div class="line">#pragma mark - QueueIntNodeObject</div><div class="line">@implementation QueueIntNodeObject</div><div class="line">@end</div><div class="line"></div><div class="line">#pragma mark - PriorityQueue</div><div class="line">@interface PriorityQueue ()</div><div class="line">@property (nonatomic) Queue *priority_queue;</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation PriorityQueue</div><div class="line">- (instancetype)init &#123;</div><div class="line">      self = [super init];</div><div class="line">      if (self) &#123;</div><div class="line">          _priority_queue = new Queue();</div><div class="line">      &#125;</div><div class="line">      return self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)dealloc &#123;</div><div class="line">      delete _priority_queue;</div><div class="line">      _priority_queue = NULL;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (QueueIntNodeObject *)topObject &#123;</div><div class="line">       return !self.priority_queue-&gt;empty() ? self.priority_queue-&gt;top() : nil;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSUInteger)count &#123;</div><div class="line">       return (NSUInteger)self.priority_queue-&gt;size();</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)popObject &#123;</div><div class="line">       if (!self.priority_queue-&gt;empty()) &#123;</div><div class="line">            self.priority_queue-&gt;pop();</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)pushObject:(QueueIntNodeObject *)myObject &#123;</div><div class="line">        self.priority_queue-&gt;push(myObject);</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)popAllObjects &#123;</div><div class="line">        if (!self.priority_queue-&gt;empty()) &#123;</div><div class="line">              delete _priority_queue;</div><div class="line">              _priority_queue = new Queue();</div><div class="line">        &#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>QueueCompare定义一个C++类，用来重载()运算符，实现两个QueueIntNodeObject对象的比较。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef std::priority_queue&lt;QueueIntNodeObject *, std::vector&lt;QueueIntNodeObject *&gt;, QueueCompare&gt; Queue;</div></pre></td></tr></table></figure>
+<p>给priority_queue另外定义个名字，这个实在太长了。<br>下面就是实现PriorityQueue的几个方法，每个方法对应的即是操作std::priority_queue的方法。当然别忘了再不使用std::priority_queue的时候delete掉，否则会有内存泄漏。</p>
+<p>我们再来看段实例代码，以前面举的排队的例子，先定义一个排队的人的对象，对象有两个属性，名称和年纪：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">@interface Person : QueueIntNodeObject</div><div class="line"></div><div class="line">@property (nonatomic, copy) NSString *name;</div><div class="line"></div><div class="line">- (instancetype)initWithName:(NSString *)name age:(NSUInteger)age;</div><div class="line"></div><div class="line">@end</div><div class="line">@implementation SeatInfo</div><div class="line">- (instancetype)initWithName:(NSString *)name age:(NSUInteger)age &#123;</div><div class="line">        if (self = [super init]) &#123;</div><div class="line">            self.name = name;</div><div class="line">            self.compareValue = age;</div><div class="line">        &#125;</div><div class="line">        return self;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>然后再创建几个Person对象，放到队列管理去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">Person *s1 = [[Person alloc] initWithName:@&quot;贾母&quot; age:70];</div><div class="line">NSLog(@&quot;Retain count is %ld&quot;, CFGetRetainCount((__bridge CFTypeRef)s1));</div><div class="line">Person *s2 = [[Person alloc] initWithName:@&quot;宝玉&quot; age:16];</div><div class="line">Person *s3 = [[Person alloc] initWithName:@&quot;黛玉&quot; age:15];</div><div class="line">Person *s4 = [[Person alloc] initWithName:@&quot;宝钗&quot; age:17];</div><div class="line">Person *s5 = [[Person alloc] initWithName:@&quot;妙玉&quot; age:18];</div><div class="line">Person *s6 = [[Person alloc] initWithName:@&quot;贾政&quot; age:40];</div><div class="line">Person *s7 = [[Person alloc] initWithName:@&quot;凤姐儿&quot; age:20];</div><div class="line">Person *s8 = [[Person alloc] initWithName:@&quot;平儿&quot; age:19];</div><div class="line"></div><div class="line">PriorityQueue *queue = [[PriorityQueue alloc] init];</div><div class="line">[queue pushObject:s1];</div><div class="line">[queue pushObject:s2];</div><div class="line">[queue pushObject:s3];</div><div class="line">[queue pushObject:s4];</div><div class="line">[queue pushObject:s5];</div><div class="line">[queue pushObject:s6];</div><div class="line">[queue pushObject:s7];</div><div class="line">[queue pushObject:s8];</div><div class="line">NSLog(@&quot;Retain count is %ld&quot;, CFGetRetainCount((__bridge CFTypeRef)s1));</div><div class="line"></div><div class="line">while (queue.count) &#123;</div><div class="line">      Person *person = (Person *)[queue topObject];</div><div class="line">      NSLog(@&quot;%@&quot;, person.name);</div><div class="line">      [queue popObject];</div><div class="line">&#125;</div><div class="line">NSLog(@&quot;Retain count is %ld&quot;, CFGetRetainCount((__bridge CFTypeRef)s1));</div></pre></td></tr></table></figure>
+<p>这段代码执行后，会按年龄从大到小输出person对象，达到了我们想要的按照年纪作为优先级参照输出的效果。<br>并且，我在其中加入了输出person对象引用计数的log,运行后发现，priority_queue在ARC下也很好的管理了计数，person对象在被push到queue中后，queue对其持强引用，引用计数加1，从queue中pop出来后，引用计数减1。所以我们依旧不用担心如何在ARC中管理内存。</p>
+<p>如果想实现更复杂的优先级的控制，只需要实现一个类似于QueueIntNodeObject的类和一个用于比较优先级的类即可。<br>是不是很简单啦啦啦~~~</p>
+<p>文中代码都提交到 github 啦：<a href="https://github.com/LicoC/PriorityQueue" target="_blank" rel="external">https://github.com/LicoC/PriorityQueue</a> ， 欢迎star 😝</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你给我家毛孩子的粮票~<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://okuetle8b.bkt.clouddn.com/IMG_6931.JPG">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://okuetle8b.bkt.clouddn.com/IMG_6930.JPG">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -241,19 +237,92 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2016/12/05/Objective-C封装std-priority-queue-实现优先队列/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/02/04/UILabel-AFNetworking-显示下载百分比/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          UILabel-AFNetworking-显示下载百分比
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -276,8 +345,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
