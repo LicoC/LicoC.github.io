@@ -150,27 +150,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-sssss" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-UILabel-AFNetworking-显示下载百分比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/04/sssss/">sssss</a>
+      <a class="article-title" href="/2017/01/22/UILabel-AFNetworking-显示下载百分比/">UILabel+AFNetworking 显示下载百分比</a>
     </h1>
   
 
         
-        <a href="/2017/02/04/sssss/" class="archive-article-date">
-  	<time datetime="2017-02-04T09:04:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-04</time>
+        <a href="/2017/01/22/UILabel-AFNetworking-显示下载百分比/" class="archive-article-date">
+  	<time datetime="2017-01-22T03:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>####用处：<br>利用AFNetworking做下载操作的时候，利用UILabel动态显示下载百分比，显示格式如下：百分比%。</p>
+<p>####如何实现：<br>我们调用AFNetworking做下载的时候，一般会创建一个NSURLSessionDownloadTask对象，调用AFURLSessionManager的方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (NSURLSessionDownloadTask *)downloadTaskWithRequest:(NSURLRequest *)request</div><div class="line">progress:(NSProgress * __autoreleasing *)progress</div><div class="line">destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination</div><div class="line">completionHandler:(void (^)(NSURLResponse *response, NSURL *filePath, NSError *error))completionHandler;</div></pre></td></tr></table></figure></p>
+<p>NSURLSessionDownloadTask继承于NSURLSessionTask，我们向捕获下载进度，实际就是监听NSURLSessionTask上的countOfBytesReceived和state属性，实时改变UILabel的显示文案即可。</p>
+<p>####源码：<br>UILabel+AFNetworking.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line"></div><div class="line">@interface UILabel (AFNetworking)</div><div class="line"></div><div class="line">- (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task;</div><div class="line"></div><div class="line">- (void)removeProgressOfTaskInfo:(NSURLSessionDownloadTask *)task;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>UILabel+AFNetworking.m<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">#import &quot;UILabel+AFNetworking.h&quot;</div><div class="line"></div><div class="line">static void * AFTaskCountOfBytesReceivedContext = &amp;AFTaskCountOfBytesReceivedContext;</div><div class="line"></div><div class="line">@implementation UILabel (AFNetworking)</div><div class="line"></div><div class="line">- (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task</div><div class="line">&#123;</div><div class="line">[task addObserver:self forKeyPath:@&quot;state&quot; options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesReceivedContext];</div><div class="line">[task addObserver:self forKeyPath:@&quot;countOfBytesReceived&quot; options:(NSKeyValueObservingOptions)0 context:AFTaskCountOfBytesReceivedContext];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)removeProgressOfTaskInfo:(NSURLSessionDownloadTask *)task &#123;</div><div class="line">if (task) &#123;</div><div class="line">@try &#123;</div><div class="line">[task removeObserver:self forKeyPath:@&quot;state&quot;];</div><div class="line">[task removeObserver:self forKeyPath:@&quot;countOfBytesReceived&quot;];</div><div class="line">&#125; @catch (NSException *exception) &#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#pragma mark - NSKeyValueObserving</div><div class="line"></div><div class="line">- (void)observeValueForKeyPath:(NSString *)keyPath</div><div class="line">ofObject:(id)object</div><div class="line">change:(__unused NSDictionary *)change</div><div class="line">context:(void *)context</div><div class="line">&#123;</div><div class="line">if (context == AFTaskCountOfBytesReceivedContext) &#123;</div><div class="line">if ([keyPath isEqualToString:NSStringFromSelector(@selector(countOfBytesReceived))]) &#123;</div><div class="line">if ([object countOfBytesExpectedToReceive] &gt; 0) &#123;</div><div class="line">dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">CGFloat progressValue = (CGFloat)[object countOfBytesReceived] / (CGFloat)[object countOfBytesExpectedToReceive] * 100.0;</div><div class="line"></div><div class="line">NSString *progress = [NSString stringWithFormat:@&quot;%lld%%&quot;, (int64_t)progressValue];</div><div class="line">self.text = progress;</div><div class="line">&#125;);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if ([keyPath isEqualToString:NSStringFromSelector(@selector(state))]) &#123;</div><div class="line">if ([(NSURLSessionTask *)object state] == NSURLSessionTaskStateCompleted) &#123;</div><div class="line">@try &#123;</div><div class="line">[object removeObserver:self forKeyPath:NSStringFromSelector(@selector(state))];</div><div class="line"></div><div class="line">if (context == AFTaskCountOfBytesReceivedContext) &#123;</div><div class="line">[object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived))];</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">@catch (NSException * __unused exception) &#123;&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure></p>
+<p>####用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[yourLabel setProgressWithDownloadProgressOfTask:yourDownloadTask];</div></pre></td></tr></table></figure></p>
+<p>监听到下载完成，会自动移除掉obersver，如果想在下载到一半的时候移除监听，调用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[yourLabel removeProgressOfTaskInfo:yourDownloadTask];</div></pre></td></tr></table></figure></p>
+<p>项目需要，所以写了这样的一个Category，其实相应的还可以做上传的动态监测，AFNetworkging自己也有一个UIKit+AFNetworking的group下实现了很多UIKit下控件关于AFNetworking的Category，大家可以去看下啦~~</p>
+
       
 
       
@@ -178,11 +186,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kvo AFNetworking</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/04/sssss/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/22/UILabel-AFNetworking-显示下载百分比/">展开全文 >></a>
         </p>
       
 
@@ -279,6 +298,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kvo AFNetworking</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
