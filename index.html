@@ -148,6 +148,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-macOS-Sierra-执行pod-update-失败-xxx-abort-pod-update" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/06/macOS-Sierra-执行pod-update-失败-xxx-abort-pod-update/">macOS Sierra 执行pod update 失败:xxx abort pod update</a>
+    </h1>
+  
+
+        
+        <a href="/2017/02/06/macOS-Sierra-执行pod-update-失败-xxx-abort-pod-update/" class="archive-article-date">
+  	<time datetime="2017-02-06T13:57:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>环境：<br><br>macOS | Sierra | 10.12.3 正式版<br><br>cocoapods: 1.0.1和0.38.2并存，但用于执行pod update的是1.0.1的版本<br><br>xcode: 8.2.1<br></p>
+<p>今天在更新了master分支代码后，pod update，但是没有生成新的.xcworkspace，pod update执行完成后，下方报错:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xxxx abort pod update</div></pre></td></tr></table></figure>
+<p>遇到这种第三方工具的报错，当然要积极google啦，于是找到这篇文章：<a href="http://www.jianshu.com/p/a78cad3ea398" target="_blank" rel="external">cocoapods：update失败且不生成workspace</a>。看上去和我的情况一模一样，只可惜解决办法不适用，因为我们整个项目组用的都是1.0.1版本的cocoapods，如果换成1.2.0版本的cocoapods，代价会很大。但是抱着试试的心态，我还是把cocoapods的版本升级了一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo gem uninstall cocoapods -v 1.0.1</div><div class="line">sudo gem install cocoapods -v 1.2.0</div></pre></td></tr></table></figure>
+<p>然而可惜的是，cocoapods报了新的错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Target &apos;XXX&apos; has frameworks with conflicting names</div></pre></td></tr></table></figure>
+<p>大概是这样的一行错，其实这个时候应该pod update是没问题了，但是由于我本身项目的特殊性，这个错误google的结果说是cocoapods本身的一个bug，用1.0.1的版本是没有问题，再加上如果1.2.0能完美解决问题，对我来说也不是一个最佳的可取方案。</p>
+<p>抱着最后试试的心态，我去苹果开发者网站下了个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">macOS_Sierra_Developer_Beta_Access_Utility.dmg</div></pre></td></tr></table></figure>
+<p>运行后会自动打开app store，检查macOS的更新，正常应该会看到一个10.12.4.beta版本macOS，如果没有看到，重启电脑，再打开app store就有了。然后点击更新到这个版本，再重启电脑，把cocoapods回退到1.0.1版本，pod update，duang~好了，一切都很完美。</p>
+<p>自从更新到macOS Sierra，真是各种问题啊。早上还遇到过在Finder里面右键选择zip一个文件夹，竟然不能zip成功的情况，强制重启了Finder才解决。</p>
+<p>所以cocoapods出现的这个问题，我猜要么是更新系统后引起了cocoapods的环境发生了紊乱所导致的，要么就是10.12.3确实有bug，10.12.4beta修复了。</p>
+<p>记录下这个问题，下次升级系统，千万不要在工作机上了，一定等稳定了再更新，要不然花费太多时间踩这种系统的坑也划不来啊。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">cocoapods</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">macOS Sierra</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/06/macOS-Sierra-执行pod-update-失败-xxx-abort-pod-update/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-UILabel-AFNetworking-显示下载百分比" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -387,6 +466,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">priority_queue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">cocoapods</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">macOS Sierra</a>
               </li>
              
               <li class="article-tag-list-item">
